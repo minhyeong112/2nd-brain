@@ -276,9 +276,33 @@ What's installed:
 
 ────────────────────────────────────
 
+📱 OPEN YOUR SECOND BRAIN IN OBSIDIAN:
+
+Your Second Brain is fully Obsidian-compatible! This is the recommended way to interact with your notes:
+
+1. Open Obsidian on your computer
+2. Click "Open folder as vault"
+3. Navigate to: ~/Desktop/2nd-brain
+4. Click "Open"
+
+Now you can:
+• Browse your knowledge garden
+• Create and edit notes
+• Drop voice memos, photos, and files directly into the folder
+• Use Obsidian's graph view to see connections
+
+💡 Optional: Want to sync across devices?
+   If you have Obsidian Sync, you can enable it AFTER opening the vault:
+   • Open the vault in Obsidian
+   • Go to Settings → Sync
+   • Connect your Obsidian Sync account
+   • Choose to merge or upload the existing vault
+
+────────────────────────────────────
+
 HOW TO USE (Daily Workflow):
 
-1. Drop files in your 2nd-brain folder:
+1. Drop files in your 2nd-brain folder (via Obsidian or Finder):
    - Voice memos (.m4a, .mp3, .wav)
    - Photos (.jpg, .png)
    - Notes (.md)
@@ -298,7 +322,8 @@ You approve at key steps. I do the heavy lifting.
 
 ────────────────────────────────────
 
-Want to try it now? Drop a voice memo or photo in the folder, then tell me:
+Want to try it now? Drop a voice memo or photo in your Obsidian vault, 
+then open VS Code and tell me:
 "Read .2ndBrain/AI-Workflow.md and process"
 
 Or just say: "process"
