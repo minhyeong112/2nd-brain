@@ -82,17 +82,20 @@ echo ""
 
 echo "📥 Step 3/7: Installing Python dependencies..."
 echo "   (This may take 5-10 minutes, especially for PyTorch and WhisperX)"
+echo "   Installing quietly to avoid overwhelming output..."
 echo ""
 
 # Activate virtual environment
 source .venv/bin/activate
 
-# Upgrade pip
+# Upgrade pip (silently)
 pip install --upgrade pip > /dev/null 2>&1
 
-# Install dependencies from .2ndBrain/
-pip install -r .2ndBrain/requirements.txt
+# Install dependencies quietly (only show errors)
+echo "   ⏳ Installing packages... (this will take several minutes)"
+pip install --quiet -r .2ndBrain/requirements.txt 2>&1 | grep -E "(ERROR|error|failed|Failed)" || true
 
+echo ""
 echo "✅ Dependencies installed"
 echo ""
 
