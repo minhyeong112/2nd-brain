@@ -46,6 +46,11 @@
 # ✓ 0-Second-Brain/.env.example
 # ✓ 0-Second-Brain/.gitignore (this file)
 
+# Exception: Allow specific .2ndBrain files for AI assistants
+!/.2ndBrain/
+!/.2ndBrain/AI-SETUP.md
+!/.2ndBrain/AI-WORKFLOW.md
+
 # ============================================================
 # PYTHON / DEVELOPMENT
 # ============================================================
