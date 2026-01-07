@@ -19,6 +19,7 @@
 
 # Python virtual environment
 /venv/
+/.venv/
 
 # Root folder processing files (temporary)
 /*.md
