@@ -138,6 +138,8 @@ Starting automated setup...
 
 ## Step 3: Check Prerequisites
 
+**IMPORTANT: This only checks if tools exist. You MUST proceed to Step 4 to create the virtual environment!**
+
 Check if required tools are installed:
 
 ```bash
@@ -151,21 +153,25 @@ git --version      # Version control
 
 ### macOS:
 ```
-I need to install some tools. Please run these commands in your terminal:
+I need to install some tools first. Please run these commands in your terminal:
 
 # Install Homebrew (if needed)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install dependencies
 brew install python@3.11 ffmpeg tesseract git
+
+After installation, tell me 'done' so I can continue.
 ```
 
 ### Linux:
 ```
-I need to install some tools. Please run:
+I need to install some tools first. Please run:
 
 sudo apt update
 sudo apt install python3 python3-venv ffmpeg tesseract-ocr git
+
+After installation, tell me 'done' so I can continue.
 ```
 
 ### Windows:
@@ -175,26 +181,35 @@ Please install these tools:
 - ffmpeg: https://ffmpeg.org/download.html (add to PATH)
 - Tesseract: https://github.com/UB-Mannheim/tesseract/wiki
 - Git: https://git-scm.com/downloads
+
+After installation, tell me 'done' so I can continue.
 ```
 
 **Wait for user to complete installations, then recheck.**
 
-Once all prerequisites pass:
+Once all prerequisites pass, say:
 
 ```
 ✅ All system tools are ready!
+
+Now proceeding to Step 4 to create your virtual environment and install dependencies...
 ```
+
+**DO NOT STOP HERE - Continue immediately to Step 4!**
 
 ---
 
-## Step 4: Run Automated Setup Script
+## Step 4: Run Automated Setup Script (CRITICAL - DO NOT SKIP!)
+
+**This step is MANDATORY even if prerequisites are installed!**
+**This creates the .venv virtual environment and installs all Python packages!**
 
 Say to user:
 
 ```
-Running automated setup... This downloads ~2GB of AI models and takes 10-15 minutes.
+Running automated setup... This creates your virtual environment and downloads ~2GB of AI models.
 
-I'll let you know when each step completes!
+This takes 10-15 minutes. I'll report progress as we go!
 ```
 
 Execute the setup script:
@@ -207,10 +222,16 @@ chmod +x .2ndBrain/setup.sh
 
 **Monitor the output and report progress to user:**
 
-- "Creating Python environment..."
-- "Installing dependencies (this is the slow part)..."
-- "Setting up vector database..."
-- "Creating folder structure..."
+- "✅ Prerequisites checked..."
+- "✅ Virtual environment created..." (KEY STEP - .venv folder created here!)
+- "📥 Installing dependencies (this is the slow part - PyTorch, WhisperX, etc.)..."
+- "✅ Folder structure created..."
+- "✅ Vector database initialized..."
+
+**NOTE:** The script runs in non-interactive mode when executed by AI, so it will:
+- Automatically create .venv if it doesn't exist
+- Skip .venv recreation if it already exists
+- Create .env from template if needed (you already did this in Step 2e)
 
 ---
 

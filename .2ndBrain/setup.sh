@@ -54,14 +54,20 @@ echo ""
 
 if [ -d ".venv" ]; then
     echo "⚠️  Virtual environment already exists"
-    read -p "   Recreate it? (y/n): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        rm -rf .venv
-        python3 -m venv .venv
-        echo "✅ Virtual environment recreated"
+    # Check if running interactively
+    if [ -t 0 ]; then
+        read -p "   Recreate it? (y/n): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            rm -rf .venv
+            python3 -m venv .venv
+            echo "✅ Virtual environment recreated"
+        else
+            echo "⏭️  Skipping virtual environment creation"
+        fi
     else
-        echo "⏭️  Skipping virtual environment creation"
+        # Non-interactive mode: Keep existing venv
+        echo "⏭️  Skipping virtual environment creation (non-interactive mode)"
     fi
 else
     python3 -m venv .venv
@@ -130,10 +136,15 @@ else
     echo "   2. Create token with 'read' access"
     echo "   3. Edit .env file and replace 'your_huggingface_token_here'"
     echo ""
-    read -p "   Open .env file now? (y/n): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        ${EDITOR:-nano} .env
+    # Check if running interactively
+    if [ -t 0 ]; then
+        read -p "   Open .env file now? (y/n): " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            ${EDITOR:-nano} .env
+        fi
+    else
+        echo "   (Run in interactive mode to edit .env)"
     fi
 fi
 
