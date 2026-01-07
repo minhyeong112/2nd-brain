@@ -1,0 +1,108 @@
+# Second Brain - Git Ignore
+# Keeps your personal notes private while sharing the system
+
+# ============================================================
+# PERSONAL CONTENT - Never commit (at vault root)
+# ============================================================
+
+# Personal note folders
+/1-Raw/
+/2-Lists/
+/3-Memos/
+/4-Wisdom/
+
+# Vector database (your note embeddings)
+/.chroma/
+
+# Environment variables (your API keys)
+/.env
+
+# Python virtual environment
+/.venv/
+
+# Root folder processing files (temporary)
+/*.md
+/*.m4a
+/*.json
+/*.pdf
+/*.jpg
+/*.jpeg
+/*.png
+/*.wav
+
+# Obsidian personal settings
+/.obsidian/
+
+# ============================================================
+# SYSTEM FILES - These ARE committed
+# ============================================================
+
+# ✓ .2ndBrain/ folder (this folder)
+# ✓ .2ndBrain/.scripts/
+# ✓ .2ndBrain/README.md
+# ✓ .2ndBrain/SETUP.md
+# ✓ .2ndBrain/requirements.txt
+# ✓ .2ndBrain/setup.sh
+# ✓ .2ndBrain/.env.example
+# ✓ .2ndBrain/.gitignore (this file)
+
+# ============================================================
+# PYTHON / DEVELOPMENT
+# ============================================================
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.pytest_cache/
+.coverage
+.hypothesis/
+
+# ============================================================
+# OS / EDITOR
+# ============================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Git
+/.git/
