@@ -25,6 +25,36 @@ fi
 PYTHON_VERSION=$(python3 --version)
 echo "✅ $PYTHON_VERSION"
 
+# Check for Python 3.9.x (required for WhisperX compatibility)
+PYTHON_MINOR=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
+if [[ ! "$PYTHON_MINOR" =~ ^3\.9 ]]; then
+    echo ""
+    echo "⚠️  WARNING: Python 3.9.x is recommended for this project"
+    echo "   Current version: $PYTHON_VERSION"
+    echo "   Recommended: Python 3.9.6"
+    echo ""
+    echo "   Why? WhisperX is unmaintained and works best with Python 3.9.x"
+    echo "   Newer Python versions (3.10+) may show deprecation warnings."
+    echo ""
+    echo "   To install Python 3.9.6 with pyenv:"
+    echo "   1. Install pyenv: brew install pyenv (macOS)"
+    echo "   2. Install Python 3.9.6: pyenv install 3.9.6"
+    echo "   3. Set for this project: pyenv local 3.9.6"
+    echo "   4. Re-run this setup script"
+    echo ""
+    # Check if running interactively
+    if [ -t 0 ]; then
+        read -p "   Continue anyway? (y/n): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "Setup cancelled."
+            exit 1
+        fi
+    else
+        echo "   Continuing in non-interactive mode..."
+    fi
+fi
+
 # Check ffmpeg (for audio processing)
 if ! command -v ffmpeg &> /dev/null; then
     echo "⚠️  ffmpeg not found"

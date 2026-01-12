@@ -4,6 +4,26 @@
 
 **User command**: `Read .2ndBrain/AI-WORKFLOW.md and execute`
 
+## 📋 Prerequisites
+
+**Python Version: 3.9.6 (Required)**
+
+This project requires **Python 3.9.x** specifically (3.9.6 recommended) because:
+- WhisperX is unmaintained and optimized for Python 3.9
+- Newer Python versions (3.10+) show deprecation warnings
+- Python 3.9.6 ensures clean, warning-free operation
+
+**Setup includes automatic Python version checking:**
+- `.python-version` file (for pyenv) specifies 3.9.6
+- `setup.sh` validates Python version before installation
+- Running with wrong Python version will show helpful warnings
+
+**If you don't have Python 3.9.6:**
+1. Install pyenv: `brew install pyenv` (macOS)
+2. Install Python 3.9.6: `pyenv install 3.9.6`
+3. Set for this project: `cd /path/to/2nd-brain && pyenv local 3.9.6`
+4. Run setup: `./.2ndBrain/setup.sh`
+
 ## 🚀 QUICK START (AI Must Follow)
 
 When user says:
