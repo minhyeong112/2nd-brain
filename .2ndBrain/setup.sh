@@ -195,7 +195,7 @@ if [ -d ".chroma/chroma.sqlite3" ]; then
     echo "✅ Vector database already initialized"
 else
     # Run the init script to create empty database
-    python3 .2ndBrain/.scripts/init-vector-db.py
+    python3 .2ndBrain/skills/init-vector-db.py
     echo "✅ Empty vector database created"
 fi
 

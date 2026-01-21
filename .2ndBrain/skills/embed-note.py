@@ -2,7 +2,7 @@
 """
 Embed a single note into the Vector Database
 Called automatically after transcription or can be run manually.
-Usage: python3 0-Second-Brain/scripts/embed-note.py "1-Raw/md/Recording_123.md"
+Usage: python3 .2ndBrain/skills/embed-note.py ".Archive/md/Recording_123.md"
 """
 
 import chromadb
@@ -80,7 +80,7 @@ def embed_note(file_path):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python3 0-Second-Brain/scripts/embed-note.py <path-to-markdown-file>", file=sys.stderr)
+        print("Usage: python3 .2ndBrain/skills/embed-note.py <path-to-markdown-file>", file=sys.stderr)
         sys.exit(1)
     
     success = embed_note(sys.argv[1])

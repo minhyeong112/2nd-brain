@@ -2,7 +2,7 @@
 """
 Transcribe audio files in root directory to JSON.
 JSON files are created in root directory for review.
-Usage: python3 0-Second-Brain/scripts/transcribe.py
+Usage: python3 .2ndBrain/skills/transcribe.py
 """
 
 import subprocess
@@ -168,7 +168,7 @@ def main():
             print(f"   ❌ Failed")
     
     print(f"\n✅ Transcription complete!")
-    print(f"📝 Next step: Run 'python3 0-Second-Brain/scripts/compile-raw-text.py'")
+    print(f"📝 Next step: Run 'python3 .2ndBrain/skills/compile-raw-text.py'")
 
 if __name__ == "__main__":
     main()

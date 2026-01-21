@@ -2,7 +2,7 @@
 """
 Semantic Search across all notes in Second Brain
 Uses vector similarity to find relevant content by meaning, not just keywords.
-Usage: python3 0-Second-Brain/scripts/semantic-search.py "morning routines"
+Usage: python3 .2ndBrain/skills/semantic-search.py "morning routines"
 """
 
 import chromadb
@@ -19,7 +19,7 @@ def semantic_search(query, n_results=10):
     
     # Check if database exists
     if not db_path.exists():
-        print("❌ Vector database not initialized. Run: python3 0-Second-Brain/scripts/init-vector-db.py", file=sys.stderr)
+        print("❌ Vector database not initialized. Run: python3 .2ndBrain/skills/init-vector-db.py", file=sys.stderr)
         return False
     
     try:
@@ -73,11 +73,11 @@ def semantic_search(query, n_results=10):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python3 0-Second-Brain/scripts/semantic-search.py <search query>", file=sys.stderr)
+        print("Usage: python3 .2ndBrain/skills/semantic-search.py <search query>", file=sys.stderr)
         print("\nExamples:")
-        print("  python3 0-Second-Brain/scripts/semantic-search.py \"productivity tips\"")
-        print("  python3 0-Second-Brain/scripts/semantic-search.py \"morning routines\"")
-        print("  python3 0-Second-Brain/scripts/semantic-search.py \"what I learned about habits\"")
+        print("  python3 .2ndBrain/skills/semantic-search.py \"productivity tips\"")
+        print("  python3 .2ndBrain/skills/semantic-search.py \"morning routines\"")
+        print("  python3 .2ndBrain/skills/semantic-search.py \"what I learned about habits\"")
         sys.exit(1)
     
     # Join all arguments as the query (allows multi-word queries without quotes)

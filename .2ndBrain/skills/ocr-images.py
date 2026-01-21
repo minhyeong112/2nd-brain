@@ -2,7 +2,7 @@
 """
 OCR Images from Markdown Files
 Extracts text from images referenced in markdown files using Tesseract OCR.
-Usage: python3 0-Second-Brain/scripts/ocr-images.py "path/to/file.md"
+Usage: python3 .2ndBrain/skills/ocr-images.py "path/to/file.md"
 """
 
 import pytesseract
@@ -138,10 +138,11 @@ def process_markdown_with_ocr(md_path):
         
         f.write("## Notes\n\n")
         f.write("*Review the extracted text above and process into appropriate lists or memos:*\n\n")
-        f.write("- **Contacts** → Add to `2-Lists/Contacts.md`\n")
-        f.write("- **Tasks** → Add to `2-Lists/Tasks.md`\n")
-        f.write("- **Ideas** → Add to relevant list in `2-Lists/`\n")
-        f.write("- **Quotes/Notes** → Create memo in `3-Memos/`\n")
+        f.write("- **Contacts** → Add to `Lists/Contacts.md`\n")
+        f.write("- **Tasks** → Add to `Tasks/Tasks.md`\n")
+        f.write("- **Ideas** → Add to relevant list in `Lists/`\n")
+        f.write("- **Quotes/Notes** → Create memo in `Memos/`\n")
+        f.write("- **Conversations** → Create note in `Conversations/`\n")
         f.write("- **Other** → Process as needed\n\n")
         f.write("---\n\n")
         f.write("*OCR performed with Tesseract*\n")
@@ -156,9 +157,9 @@ def process_markdown_with_ocr(md_path):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python3 0-Second-Brain/scripts/ocr-images.py <markdown-file>", file=sys.stderr)
+        print("Usage: python3 .2ndBrain/skills/ocr-images.py <markdown-file>", file=sys.stderr)
         print("\nExample:")
-        print("  python3 0-Second-Brain/scripts/ocr-images.py 'notes-with-images.md'")
+        print("  python3 .2ndBrain/skills/ocr-images.py 'notes-with-images.md'")
         sys.exit(1)
     
     success = process_markdown_with_ocr(sys.argv[1])

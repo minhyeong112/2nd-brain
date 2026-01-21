@@ -4,7 +4,7 @@ HARD-CODED APPROVAL GATE: Processing Plan Review
 This script must be run before AI executes any changes.
 Forces human review of PROCESSING-PLAN.md before proceeding.
 
-Usage: python3 .2ndBrain/.scripts/approve-processing-plan.py
+Usage: python3 .2ndBrain/skills/approve-processing-plan.py
 """
 
 from pathlib import Path

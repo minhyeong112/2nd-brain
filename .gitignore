@@ -6,10 +6,14 @@
 # ============================================================
 
 # Personal note folders
-/1-Raw/
-/2-Lists/
-/3-Memos/
-/4-Wisdom/
+/.Archive/
+/Lists/
+/Memos/
+/Wisdom/
+/Conversations/
+/Tasks/
+/Shopping/
+/Contacts/
 
 # Vector database (your note embeddings)
 /.chroma/
@@ -23,6 +27,7 @@
 
 # Root folder processing files (temporary)
 /*.md
+!AGENTS.md
 /*.m4a
 /*.json
 /*.pdf
@@ -31,25 +36,32 @@
 /*.png
 /*.wav
 
-# Obsidian personal settings
-/.obsidian/
+# Obsidian (ignore all except essential config)
+/.obsidian/*
+!/.obsidian/app.json
 
 # ============================================================
-# SYSTEM FILES - These ARE committed
+# SYSTEM FILES - Minimal set committed to GitHub
 # ============================================================
 
-# ✓ 0-Second-Brain/ folder (this folder)
-# ✓ 0-Second-Brain/scripts/
-# ✓ 0-Second-Brain/docs/
-# ✓ 0-Second-Brain/requirements.txt
-# ✓ 0-Second-Brain/setup.sh
-# ✓ 0-Second-Brain/.env.example
-# ✓ 0-Second-Brain/.gitignore (this file)
+# What gets committed:
+# ✓ .2ndBrain/ - Second Brain system (skills, workflow, setup)
+# ✓ AGENTS.md - AI agent guidelines
+# ✓ .opencode/opencode.json - Permission settings (ask before actions)
+# ✓ .obsidian/app.json - File visibility (show all file types)
+# ✓ .gitignore - This file
 
-# Exception: Allow specific .2ndBrain files for AI assistants
+# Exception: Allow .2ndBrain folder and all contents
 !/.2ndBrain/
-!/.2ndBrain/AI-SETUP.md
-!/.2ndBrain/AI-WORKFLOW.md
+!/.2ndBrain/**
+
+# Exception: Allow .opencode configuration (sets permission="ask")
+!/.opencode/
+!/.opencode/opencode.json
+
+# Exception: Allow .obsidian configuration (sets showUnsupportedFiles=true)
+!/.obsidian/
+!/.obsidian/app.json
 
 # ============================================================
 # PYTHON / DEVELOPMENT

@@ -4,7 +4,7 @@ Compile all text sources into RAW-TEXT.md for human review.
 HARD-CODED STOP: This script exits after creating RAW-TEXT.md.
 User must review and approve before AI proceeds to planning.
 
-Usage: python3 0-Second-Brain/scripts/compile-raw-text.py
+Usage: python3 .2ndBrain/skills/compile-raw-text.py
 """
 
 import json
@@ -122,7 +122,7 @@ def main():
             for filename in untranscribed:
                 print(f"   - {filename}")
             print(f"\n📝 You must run transcription BEFORE compilation:")
-            print(f"   .venv/bin/python3 .2ndBrain/.scripts/transcribe.py")
+            print(f"   .venv/bin/python3 .2ndBrain/skills/transcribe.py")
             print(f"\n💡 Transcription converts audio → JSON files")
             print(f"   Then this script compiles all text sources")
             print(f"{'='*60}\n")
@@ -140,7 +140,7 @@ def main():
                 with open(md_file, 'r') as f:
                     if any(x in f.read() for x in ['![', '.jpg', '.jpeg', '.png']):
                         print(f"   🔍 OCR processing: {md_file.name}")
-                        cmd = f'python3 0-Second-Brain/scripts/ocr-images.py "{md_file.name}"'
+                        cmd = f'python3 .2ndBrain/skills/ocr-images.py "{md_file.name}"'
                         run_command(cmd)
             except:
                 pass
@@ -153,7 +153,7 @@ def main():
             temp_md = Path(f"{img_file.stem}.md")
             with open(temp_md, 'w') as f:
                 f.write(f"![[{img_file.name}]]")
-            cmd = f'python3 0-Second-Brain/scripts/ocr-images.py "{temp_md.name}"'
+            cmd = f'python3 .2ndBrain/skills/ocr-images.py "{temp_md.name}"'
             run_command(cmd)
     
     # Compile all extracted text

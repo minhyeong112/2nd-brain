@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Convert WhisperX JSON transcription to readable Markdown format.
-Usage: python3 0-Second-Brain/scripts/json-to-markdown.py "1-Raw/json/FILENAME.json"
+Usage: python3 .2ndBrain/skills/json-to-markdown.py ".Archive/json/FILENAME.json"
 """
 
 import json
@@ -80,7 +80,7 @@ def json_to_markdown(json_path):
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python3 0-Second-Brain/scripts/json-to-markdown.py <json_file>")
+        print("Usage: python3 .2ndBrain/skills/json-to-markdown.py <json_file>")
         sys.exit(1)
     
     json_path = sys.argv[1]
@@ -91,9 +91,9 @@ def main():
     
     markdown = json_to_markdown(json_path)
     
-    # Save to 1-Raw/md/ with same filename
+    # Save to .Archive/md/ with same filename
     json_file = Path(json_path)
-    md_path = Path('1-Raw/md') / f"{json_file.stem}.md"
+    md_path = Path('.Archive/md') / f"{json_file.stem}.md"
     
     with open(md_path, 'w') as f:
         f.write(markdown)

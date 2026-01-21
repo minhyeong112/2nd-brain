@@ -3,7 +3,7 @@
 Second Brain processor: transcribe audio, OCR images, extract markdown text.
 Compiles all raw text into RAW-TEXT.md for user review.
 AI then reads RAW-TEXT.md and creates PROCESSING-PLAN.md using semantic search.
-Usage: python3 0-Second-Brain/scripts/process.py
+Usage: python3 .2ndBrain/skills/process.py
 """
 
 import os
@@ -208,8 +208,8 @@ def create_raw_text(m4a_files, md_files, image_files, root_dir):
 
 def main():
     root_dir = Path(".")
-    raw_json_dir = Path("1-Raw/json")
-    raw_md_dir = Path("1-Raw/md")
+    raw_json_dir = Path(".Archive/json")
+    raw_md_dir = Path(".Archive/md")
 
     # Step 1: Scan and count files at root
     print("📊 Scanning root directory...")
@@ -272,7 +272,7 @@ def main():
             try:
                 with open(md_file, 'r') as f:
                     if any(x in f.read() for x in ['![', '.jpg', '.jpeg', '.png']):
-                        cmd = f'python3 0-Second-Brain/scripts/ocr-images.py "{md_file.name}"'
+                        cmd = f'python3 .2ndBrain/skills/ocr-images.py "{md_file.name}"'
                         run_command(cmd)
             except:
                 pass
@@ -286,7 +286,7 @@ def main():
             temp_md = Path(f"{img_file.stem}.md")
             with open(temp_md, 'w') as f:
                 f.write(f"![[{img_file.name}]]")
-            cmd = f'python3 0-Second-Brain/scripts/ocr-images.py "{temp_md.name}"'
+            cmd = f'python3 .2ndBrain/skills/ocr-images.py "{temp_md.name}"'
             run_command(cmd)
         print("✅ OCR complete")
 

@@ -35,10 +35,12 @@ def init_vector_db():
     
     # Find all markdown files to embed
     markdown_dirs = [
-        base_path / "1-Raw" / "md",
-        base_path / "2-Lists",
-        base_path / "3-Memos",
-        base_path / "4-Wisdom"
+        base_path / ".Archive" / "md",
+        base_path / "Lists",
+        base_path / "Memos",
+        base_path / "Wisdom",
+        base_path / "Conversations",
+        base_path / "Tasks"
     ]
     
     all_files = []

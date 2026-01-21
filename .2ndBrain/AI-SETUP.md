@@ -1,6 +1,8 @@
 # Interactive Setup Guide for AI
 
-**For AI (Cline)**: You're guiding a human through their Second Brain setup. Be conversational, patient, and helpful.
+**For AI Assistants**: You're guiding a human through their Second Brain setup. Be conversational, patient, and helpful.
+
+**Compatible with**: OpenCode (recommended), Cline, Cursor, or any AI coding assistant
 
 **User command**: `Read .2ndBrain/AI-SETUP.md and execute`
 
@@ -241,13 +243,13 @@ Run validation tests:
 
 ```bash
 # Test transcription (should say "No audio files found")
-.venv/bin/python3 .2ndBrain/.scripts/transcribe.py
+.venv/bin/python3 .2ndBrain/skills/transcribe.py
 
 # Test compilation (should say "No files to process")  
-.venv/bin/python3 .2ndBrain/.scripts/compile-raw-text.py
+.venv/bin/python3 .2ndBrain/skills/compile-raw-text.py
 
 # Test semantic search (should work without errors)
-.venv/bin/python3 .2ndBrain/.scripts/semantic-search.py "test query"
+.venv/bin/python3 .2ndBrain/skills/semantic-search.py "test query"
 ```
 
 **If any errors occur:**
@@ -269,64 +271,68 @@ What's installed:
 ✅ Image OCR (Tesseract)
 ✅ Semantic search (ChromaDB)
 ✅ Knowledge garden structure:
-   • 1-Raw/ (new thoughts land here)
-   • 2-Lists/ (active tasks & ideas)
-   • 3-Memos/ (deep thinking documents)
-   • 4-Wisdom/ (timeless principles)
+   • .Archive/ (historical source files)
+   • Lists/ (active ideas & references)
+   • Tasks/ (task management by category)
+   • Shopping/ (shopping lists by category)
+   • Contacts/ (contact lists by category)
+   • Conversations/ (discussion notes)
+   • Memos/ (deep thinking documents)
+   • Wisdom/ (timeless principles)
 
 ────────────────────────────────────
 
-📱 OPEN YOUR SECOND BRAIN IN OBSIDIAN:
+📱 CHOOSE YOUR TOOLS:
 
-Your Second Brain is fully Obsidian-compatible! This is the recommended way to interact with your notes:
+Your Second Brain works with any markdown editor and AI assistant!
 
-1. Open Obsidian on your computer
-2. Click "Open folder as vault"
+RECOMMENDED SETUP (but optional):
+• Obsidian for notes (great graph view, mobile support)
+• OpenCode for AI assistance (privacy-first, permission controls)
+
+ALTERNATIVE TOOLS:
+• Editors: VS Code, Vim, iA Writer, Typora, or any markdown app
+• AI Assistants: Cline, Cursor, Windsurf, or your preferred tool
+
+────────────────────────────────────
+
+📝 USING OBSIDIAN (Recommended):
+
+1. Download Obsidian (free): https://obsidian.md
+2. Open Obsidian → "Open folder as vault"
 3. Navigate to: ~/Desktop/2nd-brain
-4. Click "Open"
+4. The .obsidian/app.json config will show all file types automatically
 
-Now you can:
-• Browse your knowledge garden
-• Create and edit notes
-• Drop voice memos, photos, and files directly into the folder
-• Use Obsidian's graph view to see connections
-
-💡 Optional: Want to sync across devices?
-   If you have Obsidian Sync, you can enable it AFTER opening the vault:
-   • Open the vault in Obsidian
-   • Go to Settings → Sync
-   • Connect your Obsidian Sync account
-   • Choose to merge or upload the existing vault
+Benefits:
+• Beautiful graph view of connections
+• Mobile app for capturing on-the-go
+• Rich plugin ecosystem
+• Works offline
 
 ────────────────────────────────────
 
-HOW TO USE (Daily Workflow):
+🤖 USING ANY AI ASSISTANT:
 
-1. Drop files in your 2nd-brain folder (via Obsidian or Finder):
-   - Voice memos (.m4a, .mp3, .wav)
-   - Photos (.jpg, .png)
-   - Notes (.md)
-   - PDFs
+The system works with OpenCode, Cline, Cursor, or any AI coding tool:
 
-2. Open VS Code in this folder, then tell me:
-   "Read .2ndBrain/AI-Workflow.md and process"
-
-3. I'll:
+1. Open your AI assistant in this folder
+2. Tell it: "Read .2ndBrain/AI-Workflow.md and process"
+3. The AI will:
    ✅ Transcribe audio
    ✅ Extract text from images
    ✅ Review everything with you
    ✅ Organize into your knowledge garden
    ✅ Update search index
 
-You approve at key steps. I do the heavy lifting.
+You approve at key steps. The AI does the heavy lifting.
 
 ────────────────────────────────────
 
-Want to try it now? Drop a voice memo or photo in your Obsidian vault, 
-then open VS Code and tell me:
-"Read .2ndBrain/AI-Workflow.md and process"
+🚀 TRY IT NOW:
 
-Or just say: "process"
+1. Drop a voice memo or photo in the 2nd-brain folder
+2. Open with your preferred AI assistant
+3. Say: "process"
 
 Happy thinking! 🧠✨
 ```
