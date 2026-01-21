@@ -1,383 +1,159 @@
-# Interactive Setup Guide for AI
+# Setup Guide
 
-**For AI Assistants**: You're guiding a human through their Second Brain setup. Be conversational, patient, and helpful.
+**For AI**: Guide user through interactive HuggingFace setup, then automate the rest.
 
-**Compatible with**: OpenCode (recommended), Cline, Cursor, or any AI coding assistant
+## Step 1: Intro
 
-**User command**: `Read .2ndBrain/AI-SETUP.md and execute`
-
----
-
-## 🎯 Your Mission
-
-Walk the user through HuggingFace setup step-by-step, then automate everything else. The user should feel guided, not overwhelmed.
-
----
-
-## Step 1: Confirm We're Ready
-
-Say to user:
-
+Say:
 ```
-Hi! I'm going to help you set up your Second Brain. This takes about 20 minutes total.
+Hi! I'll help set up your Second Brain (~20 minutes).
 
-I'll guide you through getting a free transcription token, then I'll handle all the technical stuff (Python, models, databases, etc.) while you grab coffee.
+I'll guide you through free transcription setup (5 min), 
+then automate the technical stuff (15 min).
 
-Ready to start? (Type 'yes' to continue)
+Ready? (Type 'yes')
 ```
 
-Wait for user confirmation.
+## Step 2: HuggingFace Setup (Interactive)
 
----
+### 2a. Create Account
 
-## Step 2: HuggingFace Setup (Interactive - 5 minutes)
-
-### 2a. Introduction
-
-Say to user:
-
-```
-First, we need to set up free audio transcription through HuggingFace. This is 100% free and takes 3 minutes.
-
-You'll need to:
-1. Create a free account
-2. Accept terms for 2 AI models (required for speaker recognition)
-3. Create an API token
-
-I'll guide you through each step. Ready? (Type 'yes')
-```
-
-Wait for confirmation.
-
----
-
-### 2b. Create Account
-
-Say to user:
-
+Say:
 ```
 Step 1/3: Create HuggingFace Account
 
-Please open this link in your browser:
-https://huggingface.co/join
-
-Create your free account, then type 'done' here when you're ready for the next step.
+Open: https://huggingface.co/join
+Create account, then type 'done'
 ```
 
-Wait for user to type 'done'.
+### 2b. Accept Model Terms (CRITICAL)
 
----
-
-### 2c. Accept Model Terms (CRITICAL!)
-
-Say to user:
-
+Say:
 ```
 Step 2/3: Accept Terms for AI Models
 
-For speaker recognition to work, you need to accept terms for TWO models.
-
-Please open these links and click "Agree and access repository" on each:
+Open these links and click "Agree and access repository":
 
 1. https://huggingface.co/pyannote/speaker-diarization-3.1
-   (Click the "Agree and access repository" button)
-
 2. https://huggingface.co/pyannote/segmentation-3.0
-   (Click the "Agree and access repository" button)
 
-Type 'done' when you've accepted BOTH. (This is important - transcription won't work without both!)
+Type 'done' when BOTH accepted (transcription won't work without both!)
 ```
 
-Wait for user to type 'done'.
+### 2c. Create Token
 
----
-
-### 2d. Create Token
-
-Say to user:
-
+Say:
 ```
-Step 3/3: Create Your API Token
+Step 3/3: Create API Token
 
-Please open this link:
-https://huggingface.co/settings/tokens
+Open: https://huggingface.co/settings/tokens
 
 1. Click "New token"
-2. Give it any name (e.g., "second-brain")
-3. Select "Read" access
-4. Click "Generate token"
-5. Copy the token (starts with "hf_...")
+2. Name: "second-brain"
+3. Access: "Read"
+4. Generate and copy token (starts with "hf_...")
 
-IMPORTANT: Keep this token somewhere safe!
-
-Now paste your token here:
+Paste your token here:
 ```
 
-**Capture the token from user input.** Store it in a variable.
-
----
-
-### 2e. Save Token
-
-After receiving token, create/update the `.env` file:
-
+Capture token, then save:
 ```bash
-echo "HF_TOKEN=<user_provided_token>" > .env
+echo "HF_TOKEN=<token>" > .env
 ```
 
-Say to user:
-
+Say:
 ```
-✅ Got it! Token saved securely.
-
-Now I'll handle all the technical setup. This takes about 15 minutes.
-You can grab coffee while I work! ☕
-
-Starting automated setup...
+✅ Token saved! Now running automated setup (~15 min)...
 ```
-
----
 
 ## Step 3: Check Prerequisites
 
-**IMPORTANT: This only checks if tools exist. You MUST proceed to Step 4 to create the virtual environment!**
-
-Check if required tools are installed:
-
+Check:
 ```bash
-python3 --version  # Need 3.11+
-ffmpeg -version    # Audio processing
-tesseract --version # OCR
-git --version      # Version control
+python3 --version  # Need 3.9.6
+ffmpeg -version
+tesseract --version
 ```
 
-**If anything is missing:**
+**If missing:**
 
-### macOS:
-```
-I need to install some tools first. Please run these commands in your terminal:
-
-# Install Homebrew (if needed)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install dependencies
-brew install python@3.11 ffmpeg tesseract git
-
-After installation, tell me 'done' so I can continue.
-```
-
-### Linux:
-```
-I need to install some tools first. Please run:
-
-sudo apt update
-sudo apt install python3 python3-venv ffmpeg tesseract-ocr git
-
-After installation, tell me 'done' so I can continue.
-```
-
-### Windows:
-```
-Please install these tools:
-- Python 3.11+: https://www.python.org/downloads/
-- ffmpeg: https://ffmpeg.org/download.html (add to PATH)
-- Tesseract: https://github.com/UB-Mannheim/tesseract/wiki
-- Git: https://git-scm.com/downloads
-
-After installation, tell me 'done' so I can continue.
-```
-
-**Wait for user to complete installations, then recheck.**
-
-Once all prerequisites pass, say:
-
-```
-✅ All system tools are ready!
-
-Now proceeding to Step 4 to create your virtual environment and install dependencies...
-```
-
-**DO NOT STOP HERE - Continue immediately to Step 4!**
-
----
-
-## Step 4: Run Automated Setup Script (CRITICAL - DO NOT SKIP!)
-
-**This step is MANDATORY even if prerequisites are installed!**
-**This creates the .venv virtual environment and installs all Python packages!**
-
-Say to user:
-
-```
-Running automated setup... This creates your virtual environment and downloads ~2GB of AI models.
-
-This takes 10-15 minutes. I'll report progress as we go!
-```
-
-Execute the setup script:
-
+macOS:
 ```bash
-cd ~/Desktop/2nd-brain
+brew install python@3.9 ffmpeg tesseract
+```
+
+Linux:
+```bash
+sudo apt install python3 python3-venv ffmpeg tesseract-ocr
+```
+
+## Step 4: Run Setup (MANDATORY)
+
+Say:
+```
+Running setup... Downloads ~2GB AI models (10-15 min)
+```
+
+Execute:
+```bash
 chmod +x .2ndBrain/setup.sh
 ./.2ndBrain/setup.sh
 ```
 
-**Monitor the output and report progress to user:**
+Report progress:
+- "✅ Prerequisites checked"
+- "✅ Virtual environment created"
+- "📥 Installing dependencies (PyTorch, WhisperX...)"
+- "✅ Folders created"
+- "✅ Vector database initialized"
 
-- "✅ Prerequisites checked..."
-- "✅ Virtual environment created..." (KEY STEP - .venv folder created here!)
-- "📥 Installing dependencies (this is the slow part - PyTorch, WhisperX, etc.)..."
-- "✅ Folder structure created..."
-- "✅ Vector database initialized..."
+## Step 5: Verify
 
-**NOTE:** The script runs in non-interactive mode when executed by AI, so it will:
-- Automatically create .venv if it doesn't exist
-- Skip .venv recreation if it already exists
-- Create .env from template if needed (you already did this in Step 2e)
-
----
-
-## Step 5: Verify Setup
-
-Run validation tests:
-
+Test:
 ```bash
-# Test transcription (should say "No audio files found")
 .venv/bin/python3 .2ndBrain/skills/transcribe.py
-
-# Test compilation (should say "No files to process")  
-.venv/bin/python3 .2ndBrain/skills/compile-raw-text.py
-
-# Test semantic search (should work without errors)
-.venv/bin/python3 .2ndBrain/skills/semantic-search.py "test query"
+.venv/bin/python3 .2ndBrain/skills/semantic-search.py "test"
 ```
 
-**If any errors occur:**
-- Check the error message
-- Common issue: HuggingFace model terms not accepted (guide user back to step 2c)
-- Report specific error and help troubleshoot
+If errors, check HF model terms (step 2b).
 
----
+## Step 6: Welcome
 
-## Step 6: Welcome & Next Steps
-
-Say to user:
-
+Say:
 ```
-🎉 Setup Complete! Your Second Brain is Ready!
+🎉 Setup Complete!
 
-What's installed:
-✅ Audio transcription (WhisperX with speaker recognition)
+Installed:
+✅ Audio transcription (WhisperX)
 ✅ Image OCR (Tesseract)
 ✅ Semantic search (ChromaDB)
-✅ Knowledge garden structure:
-   • .Archive/ (historical source files)
-   • Lists/ (active ideas & references)
-   • Tasks/ (task management by category)
-   • Shopping/ (shopping lists by category)
-   • Contacts/ (contact lists by category)
-   • Conversations/ (discussion notes)
-   • Memos/ (deep thinking documents)
-   • Wisdom/ (timeless principles)
+✅ Knowledge garden (Lists, Tasks, Memos, Wisdom, etc.)
 
-────────────────────────────────────
+────────────────────────
 
-📱 CHOOSE YOUR TOOLS:
+📝 RECOMMENDED: Use Obsidian for notes
+🤖 Use any AI assistant (OpenCode, Cline, Cursor, etc.)
 
-Your Second Brain works with any markdown editor and AI assistant!
+────────────────────────
 
-RECOMMENDED SETUP (but optional):
-• Obsidian for notes (great graph view, mobile support)
-• OpenCode for AI assistance (privacy-first, permission controls)
-
-ALTERNATIVE TOOLS:
-• Editors: VS Code, Vim, iA Writer, Typora, or any markdown app
-• AI Assistants: Cline, Cursor, Windsurf, or your preferred tool
-
-────────────────────────────────────
-
-📝 USING OBSIDIAN (Recommended):
-
-1. Download Obsidian (free): https://obsidian.md
-2. Open Obsidian → "Open folder as vault"
-3. Navigate to: ~/Desktop/2nd-brain
-4. The .obsidian/app.json config will show all file types automatically
-
-Benefits:
-• Beautiful graph view of connections
-• Mobile app for capturing on-the-go
-• Rich plugin ecosystem
-• Works offline
-
-────────────────────────────────────
-
-🤖 USING ANY AI ASSISTANT:
-
-The system works with OpenCode, Cline, Cursor, or any AI coding tool:
-
-1. Open your AI assistant in this folder
-2. Tell it: "Read .2ndBrain/AI-Workflow.md and process"
-3. The AI will:
-   ✅ Transcribe audio
-   ✅ Extract text from images
-   ✅ Review everything with you
-   ✅ Organize into your knowledge garden
-   ✅ Update search index
-
-You approve at key steps. The AI does the heavy lifting.
-
-────────────────────────────────────
-
-🚀 TRY IT NOW:
-
-1. Drop a voice memo or photo in the 2nd-brain folder
-2. Open with your preferred AI assistant
-3. Say: "process"
+🚀 TRY IT:
+1. Drop voice memo in folder
+2. Say: "process"
 
 Happy thinking! 🧠✨
 ```
 
----
+## Troubleshooting
 
-## 🔒 Important Notes
-
-### Privacy
-- Never log or share the HF_TOKEN
-- User's notes stay local (not in Git)
-- Only transcription uses HuggingFace API
-
-### Error Handling
-- Be patient and clear with error messages
-- Most common issue: Model terms not accepted on HuggingFace
-- Guide user calmly through fixes
-
-### Time Expectations
-- HuggingFace setup: 3-5 minutes (user active)
-- Automated setup: 15-20 minutes (user can leave)
-- Total: ~20 minutes
-
----
-
-## Troubleshooting Quick Reference
-
-**"HuggingFace authentication error"**
-→ User needs to accept BOTH model terms (step 2c)
-→ Go to links and click "Agree and access repository"
+**"HuggingFace auth error"**
+→ Accept BOTH model terms (step 2b)
 
 **"ffmpeg not found"**
 → brew install ffmpeg (macOS)
-→ sudo apt install ffmpeg (Linux)
 
-**"Python version too old"**
-→ Need Python 3.11+
-→ brew install python@3.11 (macOS)
-
-**"WhisperX installation failed"**
-→ Upgrade pip first: `.venv/bin/python3 -m pip install --upgrade pip`
-→ Try again
+**"Python version wrong"**
+→ Need Python 3.9.6 specifically
 
 ---
 
-*This setup runs once. After completion, user will use AI-WORKFLOW.md for daily operations.*
-
-*Setup guide last updated: 2026-01-07*
+*Last updated: 2026-01-21*
