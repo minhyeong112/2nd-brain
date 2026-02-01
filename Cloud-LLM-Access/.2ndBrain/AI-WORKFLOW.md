@@ -8,9 +8,9 @@ When user says "process":
 
 1. **IF audio exists:** `.venv/bin/python3 .2ndBrain/skills/transcribe.py`
 2. **Compile:** `.venv/bin/python3 .2ndBrain/skills/compile-raw-text.py` (waits for "approved")
-3. **Plan:** Create PROCESSING-PLAN.md using semantic search for EVERY item
+3. **Plan:** **Re-read RAW-TEXT.md from disk** (human may have edited it!), then create PROCESSING-PLAN.md using semantic search for EVERY item
 4. **Wait:** Human types "approved"
-5. **Execute:** All changes from plan
+5. **Execute:** **Re-read PROCESSING-PLAN.md from disk** (human may have edited it!), then execute all changes from plan
 6. **Cleanup:** 
    - Re-index: `.venv/bin/python3 .2ndBrain/skills/embed-note.py "path"`
    - Move files to `.Archive/`
@@ -20,6 +20,11 @@ When user says "process":
 
 1. After Step 2: Human reviews RAW-TEXT.md, fixes errors, types "approved"
 2. After Step 3: Human reviews plan, types "approved"
+
+**CRITICAL: After EVERY hard stop, the AI MUST re-read the file from disk before proceeding.**
+The human edits files in Obsidian during review. Any previously cached/read content is stale.
+- After RAW-TEXT.md approval → Re-read RAW-TEXT.md, THEN create processing plan
+- After PROCESSING-PLAN.md approval → Re-read PROCESSING-PLAN.md, THEN execute
 
 ## Semantic Search (Mandatory)
 
@@ -90,6 +95,7 @@ No subheadings or sublists. Create separate files instead.
 - Always use venv Python: `.venv/bin/python3`
 - Search before recommending
 - Wait for human approval at hard stops
+- **ALWAYS re-read files from disk after a hard stop before proceeding (human edits during review!)**
 - Clean root after processing
 - Re-index modified files
 

@@ -2,32 +2,20 @@
 # Keeps your personal notes private while sharing the system
 
 # ============================================================
-# PERSONAL CONTENT - Never commit (at vault root)
+# PERSONAL CONTENT - Never commit
 # ============================================================
 
-# Personal note folders
-/.Archive/
-/Lists/
-/Memos/
-/Wisdom/
-/Conversations/
-/Tasks/
-/Shopping/
-/Contacts/
-
-# Vector database (your note embeddings)
-/.chroma/
-
-# Environment variables (your API keys)
-/.env
-
-# Python virtual environment
-/venv/
-/.venv/
-
-# Root folder processing files (temporary)
+# Sensitive content at vault root (local LLM only)
 /*.md
 !AGENTS.md
+/.env
+
+# Cloud-LLM-Access content (all user notes gitignored)
+/Cloud-LLM-Access/**/*.md
+!/Cloud-LLM-Access/AGENTS.md
+!/Cloud-LLM-Access/CLAUDE.md
+
+# Media and temp files at root
 /*.m4a
 /*.json
 /*.pdf
@@ -35,31 +23,67 @@
 /*.jpeg
 /*.png
 /*.wav
+/*.mp3
 
-# Obsidian (ignore all except essential config)
+# Archive
+/.Archive/
+
+# ============================================================
+# HIDDEN SYSTEM FILES - Inside Cloud-LLM-Access
+# ============================================================
+
+# Vector database (your note embeddings)
+/Cloud-LLM-Access/.chroma/
+
+# Environment variables (your API keys)
+/Cloud-LLM-Access/.env
+
+# Python virtual environment
+/Cloud-LLM-Access/.venv/
+
+# Syncthing
+/.stfolder/
+
+# ============================================================
+# TECHNOLOGY CONFIGS - Selective commit
+# ============================================================
+
+# Obsidian (ignore all except essential config for new users)
 /.obsidian/*
 !/.obsidian/app.json
 
+# OpenCode (commit config file only)
+/.opencode/*
+!/.opencode/opencode.json
+
 # ============================================================
-# SYSTEM FILES - Minimal set committed to GitHub
+# FRAMEWORK - What gets committed
 # ============================================================
 
 # What gets committed:
-# ✓ .2ndBrain/ - Second Brain system (skills, workflow, setup)
-# ✓ AGENTS.md - AI agent guidelines
-# ✓ .opencode/opencode.json - Permission settings (ask before actions)
-# ✓ .obsidian/app.json - File visibility (show all file types)
+# ✓ Cloud-LLM-Access/.2ndBrain/ - Second Brain system (skills, workflow, setup)
+# ✓ AGENTS.md (vault root) - Privacy screening rules
+# ✓ Cloud-LLM-Access/AGENTS.md - Quick reference
+# ✓ Cloud-LLM-Access/CLAUDE.md - Full cloud LLM instructions
+# ✓ Cloud-LLM-Access/*/.gitkeep - Folder structure
+# ✓ .opencode/opencode.json - Permission settings
+# ✓ .obsidian/app.json - File visibility settings
 # ✓ .gitignore - This file
+# ✓ .python-version - Python version
 
-# Exception: Allow .2ndBrain folder and all contents
-!/.2ndBrain/
-!/.2ndBrain/**
+# Exception: Allow Cloud-LLM-Access/.2ndBrain folder and all contents
+!/Cloud-LLM-Access/.2ndBrain/
+!/Cloud-LLM-Access/.2ndBrain/**
 
-# Exception: Allow .opencode configuration (sets permission="ask")
+# Exception: Allow Cloud-LLM-Access folder structure
+!/Cloud-LLM-Access/
+!/Cloud-LLM-Access/*/.gitkeep
+
+# Exception: Allow .opencode configuration
 !/.opencode/
 !/.opencode/opencode.json
 
-# Exception: Allow .obsidian configuration (sets showUnsupportedFiles=true)
+# Exception: Allow .obsidian configuration
 !/.obsidian/
 !/.obsidian/app.json
 
