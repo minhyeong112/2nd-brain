@@ -6,7 +6,7 @@ Run each command below in order. If any command fails, stop and tell the user wh
 ## Step 1: Install Dependencies
 
 ```bash
-bash Cloud-LLM-Access/.2ndBrain/skills/setup/install-dependencies.sh --model MODEL_PLACEHOLDER
+bash Cloud-LLM-Access/.2ndBrain/skills/setup/install-dependencies.sh
 ```
 
 ## Step 2: Set Up Python
@@ -40,7 +40,6 @@ When all steps complete, tell the user:
 
 ## If Something Fails
 
-- If uv or Ollama fails to install, tell the user to check their internet connection.
+- If uv fails to install, tell the user to check their internet connection.
 - If Python 3.9 can't be found, tell the user: uv will download it automatically.
-- If Ollama model pull fails, tell the user to try: ollama pull <model> manually.
 - Do NOT skip steps. Each depends on the previous one.
