@@ -6,11 +6,9 @@ All content here is pre-screened and safe to process.
 
 ---
 
-## Commands
+## `organize`
 
-### `organize`
-
-Go through each `.md` file in this directory root one at a time. Skip `AGENTS.md`, `CLAUDE.md`, `.2ndBrain/`, and files already in subfolders.
+If there are `.md` files in this directory root, go through each one at a time. Skip `AGENTS.md`, `CLAUDE.md`, `.2ndBrain/`, and files already in subfolders.
 
 For each file:
 1. Read it. Summarize contents.
@@ -23,14 +21,6 @@ For each file:
 8. Move original to `.Archive/`, delete from root.
 
 For full workflow details, read `.2ndBrain/AI-WORKFLOW.md`.
-
-### `search`
-
-```bash
-.venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"
-```
-
-Always search before recommending file placement.
 
 ---
 
@@ -46,7 +36,7 @@ Always search before recommending file placement.
 
 ## If Something Looks Wrong
 
-If `.venv/`, `.Archive/`, or `.chroma/` are missing, tell the user to re-run the setup process from the Second Brain website.
+If anything seems broken or missing, tell the user to re-run the setup process from the Second Brain website.
 
 ---
 

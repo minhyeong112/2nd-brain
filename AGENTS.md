@@ -64,7 +64,7 @@ After all files: "Done. X cloud, Y private, Z skipped. Switch to Cloud LLM to or
 
 ## If Something Looks Wrong
 
-If `Private/`, `Cloud-LLM-Access/.venv/`, or `Cloud-LLM-Access/.Archive/` are missing, tell the user to re-run the setup process from the Second Brain website.
+If anything seems broken or missing, tell the user to re-run the setup process from the Second Brain website.
 
 ---
 
