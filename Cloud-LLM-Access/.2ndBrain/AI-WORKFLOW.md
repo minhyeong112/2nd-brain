@@ -1,104 +1,57 @@
-# AI Workflow
+# AI Workflow - File-by-File Processing
 
-**For AI**: Read this at every session for daily operations.
-
-## Quick Start
-
-When user says "process":
-
-1. **IF audio exists:** `.venv/bin/python3 .2ndBrain/skills/transcribe.py`
-2. **Compile:** `.venv/bin/python3 .2ndBrain/skills/compile-raw-text.py` (waits for "approved")
-3. **Plan:** **Re-read RAW-TEXT.md from disk** (human may have edited it!), then create PROCESSING-PLAN.md using semantic search for EVERY item
-4. **Wait:** Human types "approved"
-5. **Execute:** **Re-read PROCESSING-PLAN.md from disk** (human may have edited it!), then execute all changes from plan
-6. **Cleanup:** 
-   - Re-index: `.venv/bin/python3 .2ndBrain/skills/embed-note.py "path"`
-   - Move files to `.Archive/`
-   - Verify root is clean (folders only)
-
-## Hard Stops
-
-1. After Step 2: Human reviews RAW-TEXT.md, fixes errors, types "approved"
-2. After Step 3: Human reviews plan, types "approved"
-
-**CRITICAL: After EVERY hard stop, the AI MUST re-read the file from disk before proceeding.**
-The human edits files in Obsidian during review. Any previously cached/read content is stale.
-- After RAW-TEXT.md approval → Re-read RAW-TEXT.md, THEN create processing plan
-- After PROCESSING-PLAN.md approval → Re-read PROCESSING-PLAN.md, THEN execute
-
-## Semantic Search (Mandatory)
-
-Before ANY recommendation:
-```bash
-.venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"
-```
-
-Example workflow:
-```bash
-# User: "Add milk to shopping"
-.venv/bin/python3 .2ndBrain/skills/semantic-search.py "shopping milk"
-# → Check if exists before adding
-```
-
-## Processing Order (Strict)
-
-1. Transcribe audio → JSON
-2. Compile → RAW-TEXT.md
-3. Human approval → "approved"
-4. Create plan with search
-5. Human approval → "approved"
-6. Execute changes
-7. Re-index modified files
-8. Clean root (move to .Archive/)
-
-## File Structure
-
-```
-Root (temp only during processing)
-├── .Archive/           # Historical (m4a/, json/, md/, pdf/, jpeg/)
-├── Lists/              # Active knowledge
-├── Tasks/              # By category (Tasks-Urgent.md, etc.)
-├── Shopping/           # By category (Shopping-Groceries.md, etc.)
-├── Contacts/           # By category (Contacts-Healthcare.md, etc.)
-├── Memos/              # Deep thinking
-├── Conversations/      # Discussion notes
-└── Wisdom/             # Principles
-```
-
-## One Layer Deep
-
-No subheadings or sublists. Create separate files instead.
-
-## Compression Stages
-
-- **Root:** Process immediately, never accumulate
-- **.Archive/:** Historical sources (30% trust)
-- **Lists/Tasks/Shopping/Contacts:** Active (60% trust)
-- **Memos/Conversations:** Deep thinking (80% trust)
-- **Wisdom/:** Battle-tested (90% trust)
-
-## Common Commands
-
-```bash
-# Process workflow
-.venv/bin/python3 .2ndBrain/skills/transcribe.py
-.venv/bin/python3 .2ndBrain/skills/compile-raw-text.py
-
-# Search & index
-.venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"
-.venv/bin/python3 .2ndBrain/skills/embed-note.py "file.md"
-.venv/bin/python3 .2ndBrain/skills/init-vector-db.py
-```
-
-## Key Rules
-
-- Always use venv Python: `.venv/bin/python3`
-- Search before recommending
-- Wait for human approval at hard stops
-- **ALWAYS re-read files from disk after a hard stop before proceeding (human edits during review!)**
-- Clean root after processing
-- Re-index modified files
+**For AI:** Read this when user says "process".
 
 ---
 
-*Last updated: 2026-01-21*
+## Workflow
+
+1. **Scan** for unprocessed files in this directory root (not subfolders)
+2. **For each file:**
+   a. Read the file contents
+   b. If `.m4a`: `.venv/bin/python3 .2ndBrain/skills/transcribe.py`
+   c. Summarize what the file contains
+   d. Search for related content: `.venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"`
+   e. Suggest destination folder and whether to merge with existing file or create new
+   f. **STOP.** Present plan to user. Wait for approval.
+   g. **Re-read file from disk** (user may have edited during review)
+   h. Execute: move/merge content
+   i. Index: `.venv/bin/python3 .2ndBrain/skills/embed-note.py "path/to/file.md"`
+   j. Move source to `.Archive/`
+3. **Repeat** for next file
+4. **Done:** "Processing complete. X files processed."
+
+## Hard Stops
+
+- After step (f): User reviews the plan, may edit the file, then says "approved"
+- **CRITICAL:** After every approval, re-read the file from disk before proceeding. The user edits in Obsidian during review. Any cached content is stale.
+
+## Rules
+
+- **One file at a time.** Never batch process.
+- **Search before placing.** Always check if similar content exists.
+- **Never create RAW-TEXT.md.** That's the old workflow. File-by-file prevents context explosion.
+- **User decides folder structure.** Suggest, don't impose.
+- **One layer deep.** No nested categories. Create separate files instead.
+- **Always use venv:** `.venv/bin/python3`
+- **Clean root after processing.** Only folders should remain.
+
+## What NOT to Process
+
+- `AGENTS.md`, `CLAUDE.md` - System files
+- `.2ndBrain/` - Framework
+- Files already in subfolders
+
+## Available Scripts
+
+```bash
+.venv/bin/python3 .2ndBrain/skills/transcribe.py          # Audio → text
+.venv/bin/python3 .2ndBrain/skills/semantic-search.py "q"  # Search
+.venv/bin/python3 .2ndBrain/skills/embed-note.py "path"    # Index
+.venv/bin/python3 .2ndBrain/skills/ocr-images.py           # Image → text
+.venv/bin/python3 .2ndBrain/skills/json-to-markdown.py     # JSON → md
+```
+
+---
+
+*Last updated: 2026-02-01*
