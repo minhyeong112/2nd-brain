@@ -6,9 +6,10 @@
 
 ## Workflow
 
-1. **Scan** for `.md` files in this directory root (not subfolders)
-2. **Skip:** `AGENTS.md`, `CLAUDE.md`, anything in `.2ndBrain/`
-3. **For each file:**
+1. **Create `.Archive/`** if it doesn't exist: `mkdir -p .Archive`
+2. **Scan** for `.md` files in this directory root (not subfolders)
+3. **Skip:** `AGENTS.md`, `CLAUDE.md`, anything in `.2ndBrain/`
+4. **For each file:**
    a. Read the file
    b. Summarize what it contains (tasks, contacts, memo, ideas, etc.)
    c. Search for related content: `.venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"`
@@ -18,8 +19,8 @@
    g. Execute: create/edit files in destination folder
    h. Index: `.venv/bin/python3 .2ndBrain/skills/embed-note.py "path/to/file.md"`
    i. Copy original to `.Archive/`, delete from root
-4. **Repeat** for next file
-5. **Done:** "Organization complete. X files processed."
+5. **Repeat** for next file
+6. **Done:** "Organization complete. X files processed."
 
 ## Hard Stop
 

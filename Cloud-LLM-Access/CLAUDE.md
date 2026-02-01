@@ -19,6 +19,8 @@ All content here has already been privacy-screened and redacted. It is safe to p
 
 File-by-file organization. Scans this directory root for unprocessed `.md` files.
 
+**Before starting:** Create `.Archive/` folder if it doesn't exist: `mkdir -p .Archive`
+
 **For each file:**
 1. Read the file
 2. Summarize what it contains
@@ -27,9 +29,10 @@ File-by-file organization. Scans this directory root for unprocessed `.md` files
 5. **Present plan to user. Wait for approval.**
 6. **Re-read file from disk** (user may have edited in Obsidian during review)
 7. Execute the plan: create/edit files in the destination folder
-8. Copy the original source file to `.Archive/`
-9. Delete the source file from root
-10. Move to next file
+8. Index: `.venv/bin/python3 .2ndBrain/skills/embed-note.py "path/to/file.md"`
+9. Copy the original source file to `.Archive/`
+10. Delete the source file from root
+11. Move to next file
 
 **Hard stop:** Always wait for user approval (step 5) before executing. After approval, always re-read from disk - the user may have edited the file.
 
@@ -46,10 +49,6 @@ Semantic search across indexed content:
 ```
 
 Always search before recommending where to place content.
-
-### `setup`
-
-Read and execute `.2ndBrain/AI-SETUP-NEW.md` or `.2ndBrain/AI-SETUP-EXISTING.md`.
 
 ---
 

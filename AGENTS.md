@@ -77,21 +77,21 @@ Read each file. When you find a sensitive section, wrap it with markers:
 
 File-by-file ingestion. Goes through each `.md` file in vault root one at a time (skips `AGENTS.md`).
 
+**Before starting:** Create `Private/` folder if it doesn't exist: `mkdir -p Private`
+
 **For each file, present the user with options:**
-1. **Cloud** - Move to Cloud-LLM-Access/ (private sections stripped)
+1. **Cloud** - Move to Cloud-LLM-Access/ root (private sections stripped)
 2. **Private** - Move to Private/ (stays local, untouched)
 3. **Skip** - Leave in root for now
 
 **If user chooses "Cloud":**
 1. Create a copy of the file
 2. Strip all content between `---PRIVATE---` and `---END PRIVATE---` markers (inclusive of markers)
-3. Move the redacted copy to the appropriate folder in Cloud-LLM-Access/
-4. Suggest which folder (or create a new one) based on content
-5. Wait for user to confirm the destination folder
-6. Move the original (with private sections intact) to Private/
+3. Move the redacted copy to `Cloud-LLM-Access/` root (NOT into a subfolder - the cloud LLM will organize it later)
+4. Move the original (with private sections intact) to `Private/`
 
 **If user chooses "Private":**
-1. Move the entire file to Private/
+1. Move the entire file to `Private/`
 2. Nothing goes to Cloud-LLM-Access/
 
 **If user chooses "Skip":**
@@ -103,10 +103,6 @@ File-by-file ingestion. Goes through each `.md` file in vault root one at a time
 
 **After all files are processed, tell the user:**
 > "Ingestion complete. X files moved to Cloud-LLM-Access/, Y files moved to Private/, Z files skipped. Switch to your Cloud LLM instance at Cloud-LLM-Access/ to process the new files."
-
-### `setup`
-
-Run the setup workflow. Read `Cloud-LLM-Access/.2ndBrain/AI-SETUP-NEW.md` or `Cloud-LLM-Access/.2ndBrain/AI-SETUP-EXISTING.md` based on what the user tells you.
 
 ---
 
