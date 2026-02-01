@@ -9,7 +9,7 @@ You have access to all tools and content in this directory. You do NOT have acce
 
 **NEVER access the parent directory (`../`).** Sensitive content lives there. Do not attempt `ls ../`, `cd ..`, or use absolute paths outside this folder. If you need something from outside, tell the user to provide it.
 
-Privacy screening already happened before content reached you. Trust that anything here is safe to process.
+Privacy screening and transcription already happened before content reached you. Everything here is safe to process.
 
 ---
 
@@ -17,22 +17,21 @@ Privacy screening already happened before content reached you. Trust that anythi
 
 ### `process`
 
-File-by-file processing. Scans this directory root for unprocessed files.
+File-by-file processing. Scans this directory root for unprocessed `.md` files.
 
 **For each file:**
 1. Read the file
-2. If audio (`.m4a`): transcribe with `.venv/bin/python3 .2ndBrain/skills/transcribe.py`
-3. Determine what it is (task list, memo, contact info, etc.)
+2. Determine what it is (task list, memo, contact info, etc.)
+3. Search for related content: `.venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"`
 4. Suggest which folder to place it in (or create a new one)
-5. Present plan to user and wait for approval
-6. Execute: move/merge content into the right location
-7. Index: `.venv/bin/python3 .2ndBrain/skills/embed-note.py "path/to/file.md"`
-8. Move source file to `.Archive/`
-9. Move to next file
+5. Present plan to user and **wait for approval**
+6. **Re-read file from disk** (user may have edited in Obsidian)
+7. Execute: move/merge content into the right location
+8. Index: `.venv/bin/python3 .2ndBrain/skills/embed-note.py "path/to/file.md"`
+9. Move source file to `.Archive/`
+10. Move to next file
 
 **Hard stops:** Always wait for user approval before moving or merging content.
-
-**CRITICAL:** After user approves, re-read the file from disk before executing. The user may have edited it in Obsidian during review.
 
 ### `search`
 
@@ -41,7 +40,7 @@ Semantic search across all indexed content:
 .venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"
 ```
 
-Always search before recommending where to place content. Check if similar content already exists.
+Always search before recommending where to place content.
 
 ### `setup`
 
@@ -64,48 +63,33 @@ Read and execute `.2ndBrain/AI-SETUP-NEW.md` or `.2ndBrain/AI-SETUP-EXISTING.md`
 - Yes: `Tasks-Urgent.md`, `Tasks-Admin.md`, `Tasks-Health.md`
 - No: One `Tasks.md` with nested subheadings
 
-**File naming:**
-- Notes: `Title-Case-With-Dashes.md`
-- Categories: `Category-Subcategory.md`
-- Scripts: `kebab-case.py`
+**File naming:** `Title-Case-With-Dashes.md`
 
-**Folder structure:** User decides. Suggest folders based on content but always confirm. Common ones: Lists/, Tasks/, Memos/, Contacts/, Shopping/, Conversations/, Wisdom/
+**Folder structure:** User decides. Suggest based on content, always confirm.
 
 ---
 
 ## Python Environment
 
-Always use the venv Python:
+Always use the venv:
 ```bash
 .venv/bin/python3 .2ndBrain/skills/<script>.py
 ```
 
 **Available scripts:**
-- `transcribe.py` - Audio to text
-- `process.py` - Process a file
-- `embed-note.py "path"` - Index a file for semantic search
 - `semantic-search.py "query"` - Search indexed content
+- `embed-note.py "path"` - Index a file
 - `init-vector-db.py` - Initialize/reset vector database
-- `ocr-images.py` - Extract text from images
 - `json-to-markdown.py` - Convert JSON to markdown
-
----
-
-## Code Style (for writing scripts)
-
-- Python: 4 spaces, max 120 chars, double quotes, `Path` from pathlib
-- Shell: quote paths with spaces
-- Errors: descriptive messages, exit code 1 on failure
-- Always use context managers for file I/O
+- `process.py` - Process a file
 
 ---
 
 ## Security
 
-- Never commit `.env` (API keys)
-- Never commit `.chroma/` (database)
-- Never log API tokens
 - Never access parent directory
+- Never commit `.env` or `.chroma/`
+- Never log API tokens
 
 ---
 

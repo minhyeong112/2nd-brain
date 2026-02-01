@@ -8,9 +8,42 @@ All tools and scripts are in `Cloud-LLM-Access/.2ndBrain/`.
 
 ## Commands
 
+### `transcribe`
+
+Converts non-text files in vault root into `.md` files. All processing is local (no cloud APIs).
+
+**Supported file types:**
+- Audio (`.m4a`, `.mp3`, `.wav`) → Transcribe with WhisperX
+- Images (`.jpg`, `.jpeg`, `.png`, `.pdf`) → OCR with Tesseract
+
+**How to run:**
+
+For audio files:
+```bash
+Cloud-LLM-Access/.venv/bin/python3 Cloud-LLM-Access/.2ndBrain/skills/transcribe.py
+```
+
+For images referenced in markdown:
+```bash
+Cloud-LLM-Access/.venv/bin/python3 Cloud-LLM-Access/.2ndBrain/skills/ocr-images.py "filename.md"
+```
+
+**After transcription:**
+- Audio files produce `.json` transcripts, then the AI converts to `.md`
+- Image OCR produces `-ocr.md` files
+- Original files stay in place (user decides what to do with them)
+- Tell the user: "Transcription complete. You can now run `screen` to privacy-screen the text files."
+
 ### `screen`
 
-Privacy screening. Scans all `.md` files in vault root (not in subfolders) and flags sensitive sections.
+Privacy screening. Scans all **text-based files** (`.md`, `.txt`) in vault root (not in subfolders) and flags sensitive sections.
+
+**Skip these files:**
+- `AGENTS.md` (this file)
+- Any file inside a subfolder
+
+**If non-text files exist** (audio, images) that haven't been transcribed, tell the user:
+> "I found X non-text files that haven't been transcribed yet. Run `transcribe` first if you want to screen their contents too. For now I'll screen the text files only."
 
 **What counts as sensitive (defaults):**
 - Substance use references (illicit or otherwise)
@@ -35,14 +68,14 @@ Read each file. When you find a sensitive section, wrap it with markers:
 - A file can have multiple flagged sections
 - Non-sensitive content in the same file stays unmarked
 - Do NOT move, delete, or modify any content - only add markers
-- Process ALL files in one sweep
+- Process ALL text files in one sweep
 
 **After flagging all files, tell the user:**
 > "Privacy screening complete. I've flagged sections in X files. Review them in Obsidian and adjust the ---PRIVATE--- markers as needed. When you're ready, say `ingest`."
 
 ### `ingest`
 
-File-by-file ingestion. Goes through each `.md` file in vault root one at a time.
+File-by-file ingestion. Goes through each `.md` file in vault root one at a time (skips `AGENTS.md`).
 
 **For each file, present the user with options:**
 1. **Cloud** - Move to Cloud-LLM-Access/ (private sections stripped)
@@ -78,7 +111,7 @@ Run the setup workflow. Read `Cloud-LLM-Access/.2ndBrain/AI-SETUP-NEW.md` or `Cl
 
 ```
 Second Brain/            ← You are here (vault root)
-├── AGENTS.md            ← This file
+├── AGENTS.md            ← This file (skip during screening)
 ├── Private/             ← Fully private notes (never leaves this machine)
 ├── (inbox files)        ← New files land here for screening
 │
@@ -94,7 +127,8 @@ Second Brain/            ← You are here (vault root)
 - **Never auto-move files.** Always wait for user decision.
 - **Never delete content.** Only add markers or move files.
 - **Never access Cloud-LLM-Access/ content** unless running setup scripts. That's the cloud LLM's domain.
-- **For all processing, organization, transcription** - tell the user to switch to their Cloud LLM instance.
+- **For all processing, organization, transcription of cloud content** - tell the user to switch to their Cloud LLM instance.
+- **Always use venv Python:** `Cloud-LLM-Access/.venv/bin/python3`
 
 ---
 
