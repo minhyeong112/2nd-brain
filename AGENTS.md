@@ -77,8 +77,6 @@ Read each file. When you find a sensitive section, wrap it with markers:
 
 File-by-file ingestion. Goes through each `.md` file in vault root one at a time (skips `AGENTS.md`).
 
-**Before starting:** Create `Private/` folder if it doesn't exist: `mkdir -p Private`
-
 **For each file, present the user with options:**
 1. **Cloud** - Move to Cloud-LLM-Access/ root (private sections stripped)
 2. **Private** - Move to Private/ (stays local, untouched)
@@ -128,6 +126,10 @@ Second Brain/            ← You are here (vault root)
 - **Never access Cloud-LLM-Access/ content** unless running setup scripts. That's the cloud LLM's domain.
 - **For all processing, organization, transcription of cloud content** - tell the user to switch to their Cloud LLM instance.
 - **Always use venv Python:** `Cloud-LLM-Access/.venv/bin/python3`
+
+## If Something Looks Wrong
+
+If `Private/`, `Cloud-LLM-Access/.venv/`, or `Cloud-LLM-Access/.Archive/` are missing, tell the user to re-run the setup process from the Second Brain website.
 
 ---
 

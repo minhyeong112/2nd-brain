@@ -19,8 +19,6 @@ All content here has already been privacy-screened and redacted. It is safe to p
 
 File-by-file organization. Scans this directory root for unprocessed `.md` files.
 
-**Before starting:** Create `.Archive/` folder if it doesn't exist: `mkdir -p .Archive`
-
 **For each file:**
 1. Read the file
 2. Summarize what it contains
@@ -99,6 +97,10 @@ Cloud-LLM-Access/        ← You are here
 - Never access parent directory
 - Never commit `.env` or `.chroma/`
 - Never log API tokens
+
+## If Something Looks Wrong
+
+If `.venv/`, `.Archive/`, or `.chroma/` are missing, tell the user to re-run the setup process from the Second Brain website.
 
 ---
 

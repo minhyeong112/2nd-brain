@@ -51,5 +51,12 @@ else
   echo ".env already exists."
 fi
 
+# --- Create required folders ---
+mkdir -p Private
+echo "Private/: ready (local-only notes)"
+
+mkdir -p "$CLOUD_DIR/.Archive"
+echo "Cloud-LLM-Access/.Archive/: ready (organized file originals)"
+
 echo ""
 echo "=== Python environment ready ==="
