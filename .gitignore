@@ -10,6 +10,15 @@
 !AGENTS.md
 /.env
 
+# User folders at vault root (all personal content)
+/*
+!/Cloud-LLM-Access/
+!/.gitignore
+!/.python-version
+!/.obsidian/
+!/.opencode/
+!/AGENTS.md
+
 # Cloud-LLM-Access content (all user notes gitignored)
 /Cloud-LLM-Access/**/*.md
 !/Cloud-LLM-Access/AGENTS.md
