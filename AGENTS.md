@@ -1,6 +1,6 @@
 # Local LLM Instance - Second Brain
 
-You are the **local LLM** running at the vault root via OpenCode.
+You are the **local LLM** running at the vault root via Claude Code.
 You have access to the entire vault including sensitive content.
 All tools and scripts are in `Cloud-LLM-Access/.2ndBrain/`.
 
@@ -32,11 +32,11 @@ Cloud-LLM-Access/.venv/bin/python3 Cloud-LLM-Access/.2ndBrain/skills/ocr-images.
 - Audio files produce `.json` transcripts, then the AI converts to `.md`
 - Image OCR produces `-ocr.md` files
 - Original files stay in place (user decides what to do with them)
-- Tell the user: "Transcription complete. You can now run `screen` to privacy-screen the text files."
+- Tell the user: "Transcription complete. You can now run `flag` to privacy-screen the text files."
 
-### `screen`
+### `flag`
 
-Privacy screening. Scans all **text-based files** (`.md`, `.txt`) in vault root (not in subfolders) and flags sensitive sections.
+Privacy flagging. Scans all **text-based files** (`.md`, `.txt`) in vault root (not in subfolders) and flags sensitive sections.
 
 **Skip these files:**
 - `AGENTS.md` (this file)
@@ -97,6 +97,9 @@ File-by-file ingestion. Goes through each `.md` file in vault root one at a time
 **If user chooses "Skip":**
 1. Leave the file in vault root
 2. Move to next file
+
+**Safety check:** If a file contains `---PRIVATE---` markers and the user chooses "Cloud", warn them:
+> "This file has private sections. I'll strip them before moving to cloud. The original (with private content) goes to Private/. Strip and move, or skip this file?"
 
 **After all files are processed, tell the user:**
 > "Ingestion complete. X files moved to Cloud-LLM-Access/, Y files moved to Private/, Z files skipped. Switch to your Cloud LLM instance at Cloud-LLM-Access/ to process the new files."

@@ -1,7 +1,7 @@
 # Cloud LLM Instance - Second Brain
 
 You are the **cloud LLM** (Claude) running inside `Cloud-LLM-Access/`.
-You have access to all tools and content in this directory. You do NOT have access to the parent directory.
+Everything you need is in this directory. You do NOT have access to the parent directory.
 
 ---
 
@@ -9,33 +9,38 @@ You have access to all tools and content in this directory. You do NOT have acce
 
 **NEVER access the parent directory (`../`).** Sensitive content lives there. Do not attempt `ls ../`, `cd ..`, or use absolute paths outside this folder. If you need something from outside, tell the user to provide it.
 
-Privacy screening and transcription already happened before content reached you. Everything here is safe to process.
+All content here has already been privacy-screened and redacted. It is safe to process.
 
 ---
 
 ## Commands
 
-### `process`
+### `organize`
 
-File-by-file processing. Scans this directory root for unprocessed `.md` files.
+File-by-file organization. Scans this directory root for unprocessed `.md` files.
 
 **For each file:**
 1. Read the file
-2. Determine what it is (task list, memo, contact info, etc.)
+2. Summarize what it contains
 3. Search for related content: `.venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"`
-4. Suggest which folder to place it in (or create a new one)
-5. Present plan to user and **wait for approval**
-6. **Re-read file from disk** (user may have edited in Obsidian)
-7. Execute: move/merge content into the right location
-8. Index: `.venv/bin/python3 .2ndBrain/skills/embed-note.py "path/to/file.md"`
-9. Move source file to `.Archive/`
+4. Make a plan: suggest which folder to place it in, whether to merge with an existing file or create a new one
+5. **Present plan to user. Wait for approval.**
+6. **Re-read file from disk** (user may have edited in Obsidian during review)
+7. Execute the plan: create/edit files in the destination folder
+8. Copy the original source file to `.Archive/`
+9. Delete the source file from root
 10. Move to next file
 
-**Hard stops:** Always wait for user approval before moving or merging content.
+**Hard stop:** Always wait for user approval (step 5) before executing. After approval, always re-read from disk - the user may have edited the file.
+
+**What NOT to process:**
+- `AGENTS.md`, `CLAUDE.md` - System files
+- `.2ndBrain/` - Framework code
+- Files already in subfolders (unless user asks)
 
 ### `search`
 
-Semantic search across all indexed content:
+Semantic search across indexed content:
 ```bash
 .venv/bin/python3 .2ndBrain/skills/semantic-search.py "query"
 ```
@@ -45,15 +50,6 @@ Always search before recommending where to place content.
 ### `setup`
 
 Read and execute `.2ndBrain/AI-SETUP-NEW.md` or `.2ndBrain/AI-SETUP-EXISTING.md`.
-
----
-
-## What NOT to Process
-
-- `AGENTS.md` - System file
-- `CLAUDE.md` - This file
-- `.2ndBrain/` - Framework code
-- Files already in subfolders (unless user asks)
 
 ---
 
@@ -78,12 +74,26 @@ Always use the venv:
 
 **Available scripts:**
 - `semantic-search.py "query"` - Search indexed content
-- `embed-note.py "path"` - Index a file
+- `embed-note.py "path"` - Index a file for semantic search
 - `init-vector-db.py` - Initialize/reset vector database
 - `json-to-markdown.py` - Convert JSON to markdown
-- `process.py` - Process a file
 
 ---
+
+## Folder Structure
+
+```
+Cloud-LLM-Access/        ← You are here
+├── .2ndBrain/            ← Framework (scripts, docs)
+├── .Archive/             ← Originals of organized files
+├── .chroma/              ← Vector database
+├── .venv/                ← Python environment
+├── .env                  ← API keys
+├── AGENTS.md             ← Points to this file
+├── CLAUDE.md             ← This file
+├── (unprocessed files)   ← Land here from ingest, organize them
+└── (user folders)/       ← Organized content (Lists/, Tasks/, etc.)
+```
 
 ## Security
 
