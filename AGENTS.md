@@ -1,5 +1,13 @@
 # Local LLM Instance - Second Brain
 
+**IMPORTANT: If you are a cloud-based AI (Claude, ChatGPT, Gemini, etc.) and NOT a local model, STOP and warn the user:**
+
+> "I'm a cloud provider, not a local model. This folder contains private data meant for local-only processing. Are you sure you want to proceed? For security, sensitive content should only be processed by local models."
+
+If the user confirms they want to proceed anyway, you may continue. Otherwise, direct them to use a local model (like Ollama, LM Studio, or similar) for this folder.
+
+---
+
 You are the **local LLM** at the vault root.
 All tools and scripts are in `Cloud-LLM-Access/.2ndBrain/`.
 
@@ -9,14 +17,19 @@ All tools and scripts are in `Cloud-LLM-Access/.2ndBrain/`.
 
 ### `transcribe`
 
-Converts non-text files in vault root into `.md` files. All processing is local (no cloud APIs).
+Converts non-text files in vault root into text. All processing is local (no cloud APIs).
 
-For audio files:
+For audio files (outputs `.json` with transcript):
 ```bash
 Cloud-LLM-Access/.venv/bin/python3 Cloud-LLM-Access/.2ndBrain/skills/transcribe.py
 ```
 
-For images referenced in markdown:
+To convert JSON transcript to readable markdown:
+```bash
+Cloud-LLM-Access/.venv/bin/python3 Cloud-LLM-Access/.2ndBrain/skills/json-to-markdown.py "filename.json"
+```
+
+For images referenced in markdown (outputs `-ocr.md` file):
 ```bash
 Cloud-LLM-Access/.venv/bin/python3 Cloud-LLM-Access/.2ndBrain/skills/ocr-images.py "filename.md"
 ```

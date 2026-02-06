@@ -9,6 +9,7 @@
 /*.md
 !AGENTS.md
 /.env
+/Private/
 
 # User folders at vault root (all personal content)
 /*
@@ -34,8 +35,9 @@
 /*.wav
 /*.mp3
 
-# Archive
+# Archive (both locations)
 /.Archive/
+/Cloud-LLM-Access/.Archive/
 
 # ============================================================
 # HIDDEN SYSTEM FILES - Inside Cloud-LLM-Access
